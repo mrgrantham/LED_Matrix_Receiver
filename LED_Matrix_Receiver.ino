@@ -3,7 +3,6 @@
 #include <Ethernet.h>
 #include <EthernetUdp.h>         // UDP library from: bjoern@cs.stanford.edu 12/30/2008
 #include <TimerOne.h>
-//#include "Number_Array.h"
 #include <EEPROM.h>
 
 byte dataPin  = 2;    // White wire on my Grid
