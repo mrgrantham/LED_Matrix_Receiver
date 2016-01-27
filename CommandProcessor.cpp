@@ -8,15 +8,15 @@
 
 // Assuming the RGB order for LEDs
 
+enum instruction { grid = 'x', line = 'p', fill_color= 'f', fill_white = 'w', fill_off = 'o', fill_white_variable };
+
 class Command_Processor {
 
 public:
 	Command_Processor(uint8_t n, uint8_t dpin, uint8_t cpin, uint8_t order=WS2801_RGB);
 	~Command_Processor();
 	
-	void process_command(String command);	// Takes string and selects correct command
-	
-
+	void process_command(String& command);	// Takes string and selects correct command
 	
 	// direct translation of commands received over UDP
 	
@@ -78,7 +78,40 @@ Command_Processor::~Command_Processor(){
 	
 }
 
-void Command_Processor::process_command(String command){
+void Command_Processor::process_command(String& command){
+	
+	// Might need to convert from String to non dynamic solution such as Char* and use memset to clear out memory each time
+	
+	uint8_t command_char = (uint8_t)command.charAt(0); // this should capture a single character
+	// Determine the command based on this character
+	
+	switch (command_char) {
+		
+		case instruction.grid:
+		
+			break;
+		
+		case instruction.line:
+		
+			break;
+		
+		case instruction.fill_color:
+		
+			break;
+		
+		case instruction.fill_white:
+		
+			break;
+		
+		case instruction.fill_off:
+		
+			break;
+		
+		case instruction.fill_white_variable:
+		
+			break;
+					
+	}
 	
 }
 
@@ -165,7 +198,7 @@ uint8_t Command_Processor::get_pixel_color_red(uint8_t n){
 		return pixels[pixel_byte];
 	} 
 	
-	return 0; // Pixel # is invalid
+	return -1; // Pixel # is invalid
 }
 
 uint8_t Command_Processor::get_pixel_color_green(uint8_t n){
@@ -174,7 +207,7 @@ uint8_t Command_Processor::get_pixel_color_green(uint8_t n){
 		return pixels[pixel_byte + 1];
 	} 
 	
-	return 0; // Pixel # is invalid
+	return -1; // Pixel # is invalid
 }
 
 uint8_t Command_Processor::get_pixel_color_blue(uint8_t n){
@@ -183,5 +216,5 @@ uint8_t Command_Processor::get_pixel_color_blue(uint8_t n){
 		return pixels[pixel_byte + 2];
 	} 
 	
-	return 0; // Pixel # is invalid
+	return -1; // Pixel # is invalid
 }
